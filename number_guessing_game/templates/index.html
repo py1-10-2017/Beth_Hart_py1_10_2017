@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Number Guessing Game</title>
+        <link rel="stylesheet" href="{{url_for('static', filename='styles.css')}}" type="text/css" />
+    </head>
+    <body>
+        <div>
+        <h2>
+            Welcome to the Great Number Game!
+        </h2>
+        <h4>
+            I am thinking of a number between 1 and 100  
+        </h4>
+        {% if msg:%}
+            
+            {% if msg == "you guessed it!":%}
+                <h5 class="green box">{{msg}}</h5>
+                <form action="/" method="post">
+                    <input type="hidden" name="again" value="again"/>
+                    <input class="again" type="submit" value="play again"/>
+                </form>
+            {%else%}
+              <h5 class="red box">{{msg}}</h5>
+            {%endif%}
+        {% endif %}
+        {% if msg == False or msg !="you guessed it!"%}
+        <form action='/guess' method="post">
+            <p>Take a guess!</p>
+            <input type="text" name="guess"/>
+            <input type="submit" value="guess"/>
+        </form>
+         {%endif%}
+         </div>
+    </body>
+</html>
