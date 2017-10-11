@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Ninja Gold</title>
+        <link rel="stylesheet" href="{{url_for('static', filename='styles.css')}}" type="text/css" />
+    </head>
+    <body>
+        <h3>Your Gold : <span>{{session.total}}</span></h3>
+        <div class="section">
+        <div class=box>
+            <h2>Farm</h2>
+            <p>(earns 10-20 golds)</p>
+            <form action="/process_money" method="post">
+                <input type="hidden" name="action" value="farm"/>
+                <input type="submit" value="Find Gold!"/>
+            </form>
+        </div>        
+        <div class=box>
+            <h2>Cave</h2>
+            <p>(earns 5-10 golds)</p>
+            <form action="/process_money" method="post">
+                <input type="hidden" name="action" value="cave"/>
+                <input type="submit" value="Find Gold!"/>
+            </form>
+        </div>
+        <div class=box>
+            <h2>House</h2>
+            <p>(earns 2-5 golds)</p>
+            <form action="/process_money" method="post">
+                <input type="hidden" name="action" value="house"/>
+                <input type="submit" value="Find Gold!"/>
+            </form>
+        </div>
+        <div class=box>
+            <h2>Casino</h2>
+            <p>(earns 0-50 golds)</p>
+            <form action="/process_money" method="post">
+                <input type="hidden" name="action" value="casino"/>
+                <input type="submit" value="Find Gold!"/>
+            </form>
+        </div>
+        </div>
+        
+            <p>Activities:</p>
+            <div class="activities">
+                {%for value in session["msg"] %}
+                    {%if 'You lost' in value:%}
+                        <p id="red">{{value}}</p>
+                     {%else:%}
+                        <p>{{value}}</p>
+                    {%endif%}
+                {%endfor%}
+        
+            </div>
+        </div>
+    </body>
+</html>
