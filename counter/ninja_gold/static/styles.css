@@ -1,0 +1,27 @@
+.box {
+    height:150px;
+    width: 150px;
+    border: 2px black solid;
+    text-align: center;
+   
+}
+
+.section{
+    display: flex;
+
+    justify-content: space-between;
+}
+body {
+    width:800px;
+    margin: 20px auto;
+}
+.activities{
+    width:800px;
+    border: 2px black solid;
+    height: 300px;
+    padding-left: 10px;
+    overflow: scroll;
+}
+#red{
+    color:red;
+}
