@@ -1,0 +1,23 @@
+
+.form {
+   width: 400px;
+   margin:100px auto;
+   border:2px solid black;
+   padding: 10px;
+}
+.border{
+    width:600px;
+    border:2px solid black;
+    margin:0 auto;
+    padding:15px;
+    height: 400px;
+}
+h2 {
+    text-decoration:underline;
+}
+td {
+    width: 200px;
+}
+input, select{
+    width: 200px;
+}
