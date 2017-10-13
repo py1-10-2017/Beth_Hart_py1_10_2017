@@ -5,9 +5,7 @@
     </head>
     <body>
         {% for image in images: %} 
-        <img src={{image}}>        
+        <img src="{{url_for('static', filename='images/'+image+'.jpg')}}">        
          {%endfor%}
-
-
     </body>
 </html>
