@@ -1,0 +1,318 @@
+
+==========================================================
+CONNECTION VIA CLOUD9 HOSTED ENV AT TOP AND CONNECTION VIA PERSONAL WINDOWS MACHINE AT BOTTOM
+============================================================
+
+***using cloud9 hosted server requires a different config and way to import
+data using the command line***
+======================================
+CONFIG
+=======================================
+
+Hostname - $IP (The same local IP as the application you run on Cloud9)
+Port - 3306 (The default MySQL port number)
+User - $C9_USER (Your Cloud9 user name)
+Password - "" (No password since you can only access the DB from within the workspace)
+Database - c9 (The database username)
+
+
+errordrivendev:~/workspace (master) $ mysql-ctl cli
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 61
+Server version: 5.5.57-0ubuntu0.14.04.1 (Ubuntu)
+
+Copyright (c) 2000, 2017, Oracle and/or its affiliates. All rights reserved.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> use c9
+Database changed
+mysql> show tables;
+Empty set (0.00 sec)
+
+mysql> source /flask_mysql/dump.sql;
+ERROR: 
+Failed to open file '/flask_mysql/dump.sql', error: 2
+mysql> select @@hostname
+    -> ;
++-------------------------------------------+
+| @@hostname                                |
++-------------------------------------------+
+| errordrivendev-codingdojo-python1-5468957 |
++-------------------------------------------+
+1 row in set (0.00 sec)
+
+
+===================================================================
+****trying to import data from sql file****
+getting error:2, file does not exist; fix: need to find correct file path on cloud9 workspace
+solution: prefix file path with "~/workspace"
+====================================================================
+
+mysql> source errordrivendev-codingdojo-python1-5468957/flask_mysql/dump.sql
+ERROR: 
+Failed to open file 'errordrivendev-codingdojo-python1-5468957/flask_mysql/dump.sql', error: 2
+mysql> source c:dump.sql
+ERROR: 
+Failed to open file 'c:dump.sql', error: 2
+mysql> use c9
+Database changed
+mysql> source ~/workspace/flask_mysql/dump.sql                                                                                         
+Query OK, 0 rows affected (0.00 sec)
+
+Query OK, 0 rows affected (0.00 sec)
+
+Query OK, 0 rows affected (0.00 sec)
+
+Query OK, 0 rows affected (0.00 sec)
+
+Query OK, 0 rows affected (0.00 sec)
+
+Query OK, 0 rows affected (0.00 sec)
+
+Query OK, 0 rows affected (0.00 sec)
+
+Query OK, 0 rows affected (0.00 sec)
+
+Query OK, 0 rows affected (0.09 sec)
+
+Query OK, 0 rows affected (0.00 sec)
+
+Query OK, 0 rows affected (0.00 sec)
+
+Query OK, 0 rows affected (0.00 sec)
+
+Query OK, 0 rows affected (0.00 sec)
+
+Query OK, 0 rows affected (0.02 sec)
+
+Query OK, 0 rows affected (0.00 sec)
+
+Query OK, 0 rows affected (0.00 sec)
+
+Query OK, 0 rows affected (0.00 sec)
+
+Query OK, 6 rows affected (0.00 sec)
+Records: 6  Duplicates: 0  Warnings: 0
+
+Query OK, 0 rows affected (0.00 sec)
+
+Query OK, 0 rows affected (0.00 sec)
+
+Query OK, 0 rows affected (0.00 sec)
+
+Query OK, 0 rows affected (0.00 sec)
+
+Query OK, 0 rows affected (0.00 sec)
+
+Query OK, 0 rows affected (0.01 sec)
+
+Query OK, 0 rows affected (0.00 sec)
+
+Query OK, 0 rows affected (0.00 sec)
+
+Query OK, 0 rows affected (0.00 sec)
+
+Query OK, 4 rows affected (0.00 sec)
+Records: 4  Duplicates: 0  Warnings: 0
+
+Query OK, 0 rows affected (0.00 sec)
+
+Query OK, 0 rows affected (0.01 sec)
+
+Query OK, 0 rows affected (0.00 sec)
+
+Query OK, 0 rows affected (0.00 sec)
+
+Query OK, 0 rows affected (0.00 sec)
+
+Query OK, 0 rows affected (0.00 sec)
+
+Query OK, 0 rows affected (0.00 sec)
+
+Query OK, 0 rows affected (0.00 sec)
+
+Query OK, 0 rows affected (0.00 sec)
+
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> show tables;
++--------------+
+| Tables_in_c9 |
++--------------+
+| friends      |
+| users        |
++--------------+
+2 rows in set (0.00 sec)
+
+===================================
+import was successful!
+=====================================
+
+
+***USING WINDOWS BASED LOCAL MACHINE SETUP******
+
+(venv) C:\Users\Gateway\Desktop\DojoAssignments\flask_mysql>py server.py
+  File "server.py", line 8
+    print mysql.query_db("SELECT * FROM users")
+              ^
+SyntaxError: invalid syntax
+=================================
+FIX: CHAGE PRINT STATEMENT FOR VERSION 3.6
+=======================================
+(venv) C:\Users\Gateway\Desktop\DojoAssignments\flask_mysql>py server.py
+Traceback (most recent call last):
+  File "server.py", line 1, in <module>
+    from flask import Flask
+ModuleNotFoundError: No module named 'flask'
+
+(venv) C:\Users\Gateway\Desktop\DojoAssignments\flask_mysql>cd..
+
+(venv) C:\Users\Gateway\Desktop\DojoAssignments>cd..
+
+(venv) C:\Users\Gateway\Desktop>cd..
+
+(venv) C:\Users\Gateway>py -3.6 -m pip freeze
+click==6.7
+Django==1.11.5
+Flask==0.12.2
+Flask-SQLAlchemy==2.3.2
+itsdangerous==0.24
+Jinja2==2.9.6
+MarkupSafe==1.0
+mysqlclient==1.3.12
+pytz==2017.2
+SQLAlchemy==1.1.14
+virtualenv==15.1.0
+Werkzeug==0.12.2
+
+(venv) C:\Users\Gateway>cd desktop/DojoAssignments
+
+(venv) C:\Users\Gateway\Desktop\DojoAssignments>cd flask_mysql
+========================================================================
+FIX: USED INCORRECT PYTHON VERSION, NEED TO CALL WITH "PY -3.6 SERVER.PY"
+=======================================================================
+(venv) C:\Users\Gateway\Desktop\DojoAssignments\flask_mysql>py -3.6 server.py
+Traceback (most recent call last):
+  File "C:\Users\Gateway\AppData\Local\Programs\Python\Python36\lib\site-packages\sqlalchemy\pool.py", line 1122, in _do_get
+    return self._pool.get(wait, self._timeout)
+  File "C:\Users\Gateway\AppData\Local\Programs\Python\Python36\lib\site-packages\sqlalchemy\util\queue.py", line 145, in get
+    raise Empty
+sqlalchemy.util.queue.Empty
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\Gateway\AppData\Local\Programs\Python\Python36\lib\site-packages\sqlalchemy\engine\base.py", line 2147, in _wrap_pool_connect
+    return fn()
+  File "C:\Users\Gateway\AppData\Local\Programs\Python\Python36\lib\site-packages\sqlalchemy\pool.py", line 387, in connect
+    return _ConnectionFairy._checkout(self)
+  File "C:\Users\Gateway\AppData\Local\Programs\Python\Python36\lib\site-packages\sqlalchemy\pool.py", line 766, in _checkout
+    fairy = _ConnectionRecord.checkout(pool)
+  File "C:\Users\Gateway\AppData\Local\Programs\Python\Python36\lib\site-packages\sqlalchemy\pool.py", line 516, in checkout
+    rec = pool._do_get()
+  File "C:\Users\Gateway\AppData\Local\Programs\Python\Python36\lib\site-packages\sqlalchemy\pool.py", line 1138, in _do_get
+    self._dec_overflow()
+  File "C:\Users\Gateway\AppData\Local\Programs\Python\Python36\lib\site-packages\sqlalchemy\util\langhelpers.py", line 66, in __exit__
+    compat.reraise(exc_type, exc_value, exc_tb)
+  File "C:\Users\Gateway\AppData\Local\Programs\Python\Python36\lib\site-packages\sqlalchemy\util\compat.py", line 187, in reraise
+    raise value
+  File "C:\Users\Gateway\AppData\Local\Programs\Python\Python36\lib\site-packages\sqlalchemy\pool.py", line 1135, in _do_get
+    return self._create_connection()
+  File "C:\Users\Gateway\AppData\Local\Programs\Python\Python36\lib\site-packages\sqlalchemy\pool.py", line 333, in _create_connection
+    return _ConnectionRecord(self)
+  File "C:\Users\Gateway\AppData\Local\Programs\Python\Python36\lib\site-packages\sqlalchemy\pool.py", line 461, in __init__
+    self.__connect(first_connect_check=True)
+  File "C:\Users\Gateway\AppData\Local\Programs\Python\Python36\lib\site-packages\sqlalchemy\pool.py", line 651, in __connect
+    connection = pool._invoke_creator(self)
+  File "C:\Users\Gateway\AppData\Local\Programs\Python\Python36\lib\site-packages\sqlalchemy\engine\strategies.py", line 105, in connect
+    return dialect.connect(*cargs, **cparams)
+  File "C:\Users\Gateway\AppData\Local\Programs\Python\Python36\lib\site-packages\sqlalchemy\engine\default.py", line 393, in connect
+    return self.dbapi.connect(*cargs, **cparams)
+  File "C:\Users\Gateway\AppData\Local\Programs\Python\Python36\lib\site-packages\MySQLdb\__init__.py", line 86, in Connect
+    return Connection(*args, **kwargs)
+  File "C:\Users\Gateway\AppData\Local\Programs\Python\Python36\lib\site-packages\MySQLdb\connections.py", line 204, in __init__
+    super(Connection, self).__init__(*args, **kwargs2)
+_mysql_exceptions.OperationalError: (1049, "Unknown database 'friends'")
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "server.py", line 8, in <module>
+    print (mysql.query_db("SELECT * FROM users"))
+  File "C:\Users\Gateway\Desktop\DojoAssignments\flask_mysql\mysqlconnection.py", line 22, in query_db
+    result = self.db.session.execute(text(query), data)
+  File "C:\Users\Gateway\AppData\Local\Programs\Python\Python36\lib\site-packages\sqlalchemy\orm\scoping.py", line 157, in do
+    return getattr(self.registry(), name)(*args, **kwargs)
+  File "C:\Users\Gateway\AppData\Local\Programs\Python\Python36\lib\site-packages\sqlalchemy\orm\session.py", line 1139, in execute
+    bind, close_with_result=True).execute(clause, params or {})
+  File "C:\Users\Gateway\AppData\Local\Programs\Python\Python36\lib\site-packages\sqlalchemy\orm\session.py", line 1003, in _connection_for_bind
+    engine, execution_options)
+  File "C:\Users\Gateway\AppData\Local\Programs\Python\Python36\lib\site-packages\sqlalchemy\orm\session.py", line 403, in _connection_for_bind
+    conn = bind.contextual_connect()
+  File "C:\Users\Gateway\AppData\Local\Programs\Python\Python36\lib\site-packages\sqlalchemy\engine\base.py", line 2112, in contextual_connect
+    self._wrap_pool_connect(self.pool.connect, None),
+  File "C:\Users\Gateway\AppData\Local\Programs\Python\Python36\lib\site-packages\sqlalchemy\engine\base.py", line 2151, in _wrap_pool_connect
+    e, dialect, self)
+  File "C:\Users\Gateway\AppData\Local\Programs\Python\Python36\lib\site-packages\sqlalchemy\engine\base.py", line 1465, in _handle_dbapi_exception_noconnection
+    exc_info
+  File "C:\Users\Gateway\AppData\Local\Programs\Python\Python36\lib\site-packages\sqlalchemy\util\compat.py", line 203, in raise_from_cause
+    reraise(type(exception), exception, tb=exc_tb, cause=cause)
+  File "C:\Users\Gateway\AppData\Local\Programs\Python\Python36\lib\site-packages\sqlalchemy\util\compat.py", line 186, in reraise
+    raise value.with_traceback(tb)
+  File "C:\Users\Gateway\AppData\Local\Programs\Python\Python36\lib\site-packages\sqlalchemy\engine\base.py", line 2147, in _wrap_pool_connect
+    return fn()
+  File "C:\Users\Gateway\AppData\Local\Programs\Python\Python36\lib\site-packages\sqlalchemy\pool.py", line 387, in connect
+    return _ConnectionFairy._checkout(self)
+  File "C:\Users\Gateway\AppData\Local\Programs\Python\Python36\lib\site-packages\sqlalchemy\pool.py", line 766, in _checkout
+    fairy = _ConnectionRecord.checkout(pool)
+  File "C:\Users\Gateway\AppData\Local\Programs\Python\Python36\lib\site-packages\sqlalchemy\pool.py", line 516, in checkout
+    rec = pool._do_get()
+  File "C:\Users\Gateway\AppData\Local\Programs\Python\Python36\lib\site-packages\sqlalchemy\pool.py", line 1138, in _do_get
+    self._dec_overflow()
+  File "C:\Users\Gateway\AppData\Local\Programs\Python\Python36\lib\site-packages\sqlalchemy\util\langhelpers.py", line 66, in __exit__
+    compat.reraise(exc_type, exc_value, exc_tb)
+  File "C:\Users\Gateway\AppData\Local\Programs\Python\Python36\lib\site-packages\sqlalchemy\util\compat.py", line 187, in reraise
+    raise value
+  File "C:\Users\Gateway\AppData\Local\Programs\Python\Python36\lib\site-packages\sqlalchemy\pool.py", line 1135, in _do_get
+    return self._create_connection()
+  File "C:\Users\Gateway\AppData\Local\Programs\Python\Python36\lib\site-packages\sqlalchemy\pool.py", line 333, in _create_connection
+    return _ConnectionRecord(self)
+  File "C:\Users\Gateway\AppData\Local\Programs\Python\Python36\lib\site-packages\sqlalchemy\pool.py", line 461, in __init__
+    self.__connect(first_connect_check=True)
+  File "C:\Users\Gateway\AppData\Local\Programs\Python\Python36\lib\site-packages\sqlalchemy\pool.py", line 651, in __connect
+    connection = pool._invoke_creator(self)
+  File "C:\Users\Gateway\AppData\Local\Programs\Python\Python36\lib\site-packages\sqlalchemy\engine\strategies.py", line 105, in connect
+    return dialect.connect(*cargs, **cparams)
+  File "C:\Users\Gateway\AppData\Local\Programs\Python\Python36\lib\site-packages\sqlalchemy\engine\default.py", line 393, in connect
+    return self.dbapi.connect(*cargs, **cparams)
+  File "C:\Users\Gateway\AppData\Local\Programs\Python\Python36\lib\site-packages\MySQLdb\__init__.py", line 86, in Connect
+    return Connection(*args, **kwargs)
+  File "C:\Users\Gateway\AppData\Local\Programs\Python\Python36\lib\site-packages\MySQLdb\connections.py", line 204, in __init__
+    super(Connection, self).__init__(*args, **kwargs2)
+sqlalchemy.exc.OperationalError: (_mysql_exceptions.OperationalError) (1049, "Unknown database 'friends'")
+============================================================
+FIX: WRONG db NAME, CHANGE TO 'FRIENDS2' IN SERVER.PY FILE
+=========================================================
+
+
+(venv) C:\Users\Gateway\Desktop\DojoAssignments\flask_mysql>py -3.6 server.py
+C:\Users\Gateway\AppData\Local\Programs\Python\Python36\lib\site-packages\sqlalchemy\dialects\mysql\base.py:1576: Warning: (1287, "'@@tx_isolation' is deprecated and will be removed in a future release. Please use '@@transaction_isolation' instead")
+  cursor.execute('SELECT @@tx_isolation')
+[{'id': 1, 'name': 'Chris'}, {'id': 2, 'name': 'Diana'}, {'id': 3, 'name': 'Jessica'}, {'id': 4, 'name': 'James'}]
+ * Restarting with stat
+C:\Users\Gateway\AppData\Local\Programs\Python\Python36\lib\site-packages\sqlalchemy\dialects\mysql\base.py:1576: Warning: (1287, "'@@tx_isolation' is deprecated and will be removed in a future release. Please use '@@transaction_isolation' instead")
+  cursor.execute('SELECT @@tx_isolation')
+[{'id': 1, 'name': 'Chris'}, {'id': 2, 'name': 'Diana'}, {'id': 3, 'name': 'Jessica'}, {'id': 4, 'name': 'James'}]
+ * Debugger is active!
+ * Debugger PIN: 151-377-688
+ * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+
+(venv) C:\Users\Gateway\Desktop\DojoAssignments\flask_mysql>
+==============================================================
+SUCCESS! CONNECTED AND PRINTED THE USERS IN DB
+=============================================================
