@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>email collector</title>
+    </head>
+    <body>
+        {% with messages = get_flashed_messages() %}
+            {% if messages: %}
+                {% for message in messages: %}
+                  <p id='green'>{{message}}</p>
+                {% endfor %} 
+            {% endif %} 
+        {% endwith %} 
+                 
+                 <h2>Email Addresses Entered:</h2>
+        {% for item in emails: %}
+            <p>email:{{item["email"]}} created: {{item["created_at"].strftime("%m/%d/%y %I:%M")}}</p>
+            
+        {% endfor %}
+
+
+        
+    </body>
+</html>
