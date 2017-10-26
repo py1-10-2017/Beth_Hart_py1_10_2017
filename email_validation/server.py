@@ -17,10 +17,10 @@ def new():
 @app.route('/create', methods=["POST"])
 def create():
     if not regex_obj.match(request.form['email']):
-        flash("Please enter a valid email address.")
+        flash("ERROR: Please enter a valid email address.")
         return redirect('/')
     else:
-        flash("The email address you entered is valid! Thank you!")
+        flash("SUCCESS: The email address you entered is valid! Thank you!")
         query = "INSERT INTO emails(email, created_at, updated_at) VALUES (:email, now(), now())";
         mysql.query_db(query, {'email':request.form['email']})    
         return redirect("/show")
@@ -28,9 +28,15 @@ def create():
     
 @app.route("/show")
 def show():
-    query = "SELECT email, created_at FROM emails";
+    query = "SELECT * FROM emails";
     all_emails = mysql.query_db(query)
-    print all_emails
     return render_template('show.html', emails=all_emails)
+    
+@app.route("/delete/<idparam>")
+def delete(idparam):
+    query = "DELETE FROM emails WHERE id=:id"
+    data = {"id" : idparam}
+    mysql.query_db(query, data)
+    return redirect('/show')
 
 app.run(host="0.0.0.0", port=int("8080"))

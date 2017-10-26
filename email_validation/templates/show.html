@@ -2,23 +2,33 @@
 <html>
     <head>
         <title>email collector</title>
+        <link rel="stylesheet" href="{{ url_for('static', filename='style.css')}}" type="text/css" />
+
     </head>
     <body>
         {% with messages = get_flashed_messages() %}
             {% if messages: %}
                 {% for message in messages: %}
-                  <p id='green'>{{message}}</p>
+                  <p id='green msg'>{{message}}</p>
+
                 {% endfor %} 
             {% endif %} 
         {% endwith %} 
                  
-                 <h2>Email Addresses Entered:</h2>
-        {% for item in emails: %}
-            <p>email:{{item["email"]}} created: {{item["created_at"].strftime("%m/%d/%y %I:%M")}}</p>
-            
-        {% endfor %}
-
-
+                 <h2>Email Address Collection:</h2>
+                 <table>
+                     {%for item in emails: %}
+                         <tr>
+                             <td >{{item["email"]}}</td>
+                             <td>{{item["created_at"].strftime("%m/%d/%y %I:%M")}}</td>
+                             <td>        
+                                 <form method="delete" action="/delete/{{item['id']}}">
+                                    <input  class ="red delete" type="submit" value="Delete"/>
+                                </form>
+                            </td>
+                         </tr>
+                    {% endfor %}
+                 </table>
         
     </body>
 </html>

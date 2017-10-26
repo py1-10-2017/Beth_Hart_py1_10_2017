@@ -1,0 +1,27 @@
+.msg {
+    width: 30%;
+    
+}
+
+.red {
+    color: white;
+    background: red;
+    text-align: center;
+}
+.green {
+    color: white;
+    background: green;
+    text-align: center;
+}
+
+h2 {
+    text-decoration: underline;
+}
+
+
+.delete {
+    width: 40px;
+    font-size: 10px;
+    text-align: center;
+
+}
