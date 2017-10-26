@@ -32,7 +32,7 @@ def show():
     all_emails = mysql.query_db(query)
     return render_template('show.html', emails=all_emails)
     
-@app.route("/delete/<idparam>")
+@app.route("/delete/<idparam>", methods=["post"])
 def delete(idparam):
     query = "DELETE FROM emails WHERE id=:id"
     data = {"id" : idparam}

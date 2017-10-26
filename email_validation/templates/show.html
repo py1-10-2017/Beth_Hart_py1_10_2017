@@ -22,7 +22,7 @@
                              <td >{{item["email"]}}</td>
                              <td>{{item["created_at"].strftime("%m/%d/%y %I:%M")}}</td>
                              <td>        
-                                 <form method="delete" action="/delete/{{item['id']}}">
+                                 <form method="post" action="/delete/{{item['id']}}">
                                     <input  class ="red delete" type="submit" value="Delete"/>
                                 </form>
                             </td>
