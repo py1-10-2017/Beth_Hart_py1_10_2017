@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Full Friends</title>
+        <link rel="stylesheet" href="{{url_for('static',filename='style.css')}} type="text/css" />
+    </head>
+    <body>
+        <h3>Edit friend: </h3>
+        <h4>All fields must be re-entered!>
+        <form action='/friends/{{friend[0]['id']}}' method='post'>
+            <label for="first_name">First Name: </label>
+            <input type="text" id="first_name" name="first_name" placeholder={{friend[0]['first_name']}}>            
+            <label for="last_name">Last Name: </label>
+            <input  type="text" id="last_name" name="last_name" placeholder={{friend[0]['last_name']}}>            
+            <label for="email">Email: </label>
+            <input placeholder="{{friend[0]['email']}}" type="text" id="email" name="email">    
+            <input type='submit' name="submit" value="update">
+        </form>
+    </body>
+</html>
