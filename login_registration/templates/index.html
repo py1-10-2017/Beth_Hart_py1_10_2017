@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>My secure website</title>
+        <link rel="stylesheet" href="{{url_for('static',filename='style.css')}}" type="text/css" />
+    </head>
+    <body>
+        {% with messages = get_flashed_messages()%}
+            {% if messages: %}
+                 {% for message in messages: %}
+                      <p class="red">{{ message }}</p>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+        <h2>Please login: </h2>
+        <form action='/user/login' method='POST'>
+            email: <input type="text" name="email"/>
+            password: <input type="text" name="password"/>
+            <input type="submit" value="login"/>
+        </form>
+
+        <form action='user/new' method='GET'>
+            <p>If you are not a member, please click here to sign up. <input type="submit" value="register"/></p>
+            
+        </form>
+    </body>
+    
+</html>
