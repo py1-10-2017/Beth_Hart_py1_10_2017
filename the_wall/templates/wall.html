@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>The Wall</title>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
+        <link rel="stylesheet" href="{{url_for('static',filename='style.css')}}" type="text/css" />
+    </head>
+    <body>
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages: %}
+                {% for category,message in messages:%}
+                    <p class="alert alert-{{category}}">{{message}}</p>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+ 
+        <form action='/messages' method='POST'>
+            <label for="message">Create a new message:</label>
+            <p><textarea id="message" name="message" placehold="enter message"></textarea></p>
+            <input type="submit" value="add message"/>
+        </form>
+        
+        {% for user_message in user_messages%}
+            <h6>{{user_message['first_name']}} {{user_message['last_name']}} - {{user_message["created_at"].strftime("%m/%d/%y %I:%M")}}</h6>
+            <p class=''>{{user_message['message']}}</p>
+            <div class="list-group indent">
+                {% for comment in comments: %}
+                    {% if user_message['id'] == comment['message_id'] %}
+                        <h6 class='md-1'>{{comment['first_name']}} {{comment['last_name']}} <small>{{comment['created_at'].strftime('%m/%d/%y %I:%M')}}</small></h6>
+                        <p>{{comment['comment']}}</p>
+                    {%endif%}
+                {%endfor%}
+            </div>
+            <form action="/messages/{{user_message['id']}}/comments" method="POST">
+                <label for="comment">Add a comment: </label>
+                <p><textarea id="comment" name="comment" placeholder='enter comment'></textarea></p>
+                <input class="btn btn-sm" type="submit" value="add comment"/>
+            </form>
+            <hr>
+        {% endfor %}
+
+
+
+    </body>
+</html>

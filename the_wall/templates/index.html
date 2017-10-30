@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>The Wall</title>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
+        <link rel="stylesheet" href="{{url_for('static',filename='style.css')}}" type="text/css" />
+    </head>
+    <body>
+        {% with messages = get_flashed_messages() %}
+            {% if messages: %}
+                {% for message in messages:%}
+                    <p class="alert alert-danger">{{message}}</p>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+        <h3>Sign up!</h3>
+        <form method="POST" action="/users/register">
+            <label for="first_name">First Name: </label>
+            <input id="first_name" type="text" name="first_name"/>
+            <label for="last_name">Last Name: </label>
+            <input id="last_name" type="text" name="last_name"/>
+            <label for="email">Email: </label>
+            <input id="email" type="text" name="email"/>
+            <label for="password">Password: </label>
+            <p class='subtext'>Password must be at least 8 characters.</p>
+            <input id="password" type="text" name="password"/>
+            <label for="conf_pw">Confirm Password: </label>
+            <input id="conf_pw" type="text" name="conf_pw"/>
+            <input type="submit" value="Sign Up"/>
+        </form>
+        <h3>Login</h3>
+        
+        <form method="POST" action="/users/login">
+            <label for="email">Email: </label>
+            <input id="email" type="text" name="email"/>
+            <label for="password">Password: </label>
+            <input id="password" type="text" name="password"/>
+            <input type="submit" value="Login"/>
+        </form>
+    </body>
+</html>
