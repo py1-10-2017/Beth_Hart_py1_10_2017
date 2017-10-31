@@ -15,15 +15,22 @@
         {% endwith %}
  
         <form action='/messages' method='POST'>
-            <label for="message">Create a new message:</label>
-            <p><textarea id="message" name="message" placehold="enter message"></textarea></p>
-            <input type="submit" value="add message"/>
+            <div class="form-group">
+                <label for="message">Create a new message:</label>
+                <textarea class='form-control' id="message" name="message" placehold="enter message"></textarea></p>
+                <input class='btn btn-sm btn-primary' type="submit" value="add message"/>
+            </div>
         </form>
         
         {% for user_message in user_messages%}
             <h6>{{user_message['first_name']}} {{user_message['last_name']}} - {{user_message["created_at"].strftime("%m/%d/%y %I:%M")}}</h6>
             <p class=''>{{user_message['message']}}</p>
+            
+            {% if user_message['timediff'] < 30 %}
+                <a href='/messages/{{user_message['id']}}/delete' name='delete'>delete</a>
+            {% endif%}
             <div class="list-group indent">
+            
                 {% for comment in comments: %}
                     {% if user_message['id'] == comment['message_id'] %}
                         <h6 class='md-1'>{{comment['first_name']}} {{comment['last_name']}} <small>{{comment['created_at'].strftime('%m/%d/%y %I:%M')}}</small></h6>
@@ -31,10 +38,12 @@
                     {%endif%}
                 {%endfor%}
             </div>
-            <form action="/messages/{{user_message['id']}}/comments" method="POST">
-                <label for="comment">Add a comment: </label>
-                <p><textarea id="comment" name="comment" placeholder='enter comment'></textarea></p>
-                <input class="btn btn-sm" type="submit" value="add comment"/>
+            <form class="indent" action="/messages/{{user_message['id']}}/comments" method="POST">
+                <div class="form-group">
+                    <label for="comment">Add a comment: </label>
+                    <textarea class='form-control' id="comment" name="comment" placeholder='enter comment'></textarea>
+                    <input class="btn btn-sm btn-outline-primary" type="submit" value="add comment"/>
+                </div>
             </form>
             <hr>
         {% endfor %}

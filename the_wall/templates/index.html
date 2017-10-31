@@ -6,6 +6,7 @@
         <link rel="stylesheet" href="{{url_for('static',filename='style.css')}}" type="text/css" />
     </head>
     <body>
+        <h1>Welcome to JibberJabber!</h1>
         {% with messages = get_flashed_messages() %}
             {% if messages: %}
                 {% for message in messages:%}
@@ -13,29 +14,63 @@
                 {% endfor %}
             {% endif %}
         {% endwith %}
-        <h3>Sign up!</h3>
-        <form method="POST" action="/users/register">
-            <label for="first_name">First Name: </label>
-            <input id="first_name" type="text" name="first_name"/>
-            <label for="last_name">Last Name: </label>
-            <input id="last_name" type="text" name="last_name"/>
-            <label for="email">Email: </label>
-            <input id="email" type="text" name="email"/>
-            <label for="password">Password: </label>
-            <p class='subtext'>Password must be at least 8 characters.</p>
-            <input id="password" type="text" name="password"/>
-            <label for="conf_pw">Confirm Password: </label>
-            <input id="conf_pw" type="text" name="conf_pw"/>
-            <input type="submit" value="Sign Up"/>
-        </form>
-        <h3>Login</h3>
-        
-        <form method="POST" action="/users/login">
-            <label for="email">Email: </label>
-            <input id="email" type="text" name="email"/>
-            <label for="password">Password: </label>
-            <input id="password" type="text" name="password"/>
-            <input type="submit" value="Login"/>
-        </form>
+        <div class="section">
+            <h3>Returning users, login</h3>
+            <form method="POST" action="/users/login">
+                <div class="form-group row">
+                    <label class="col-sm-2 col-form-label" for="email">Email: </label>
+                    <div>
+                        <input id="email" type="text" name="email"/>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-sm-2 col-form-label" for="password">Password: </label>
+                    <div>
+                        <input id="password" type="text" name="password"/>
+                    </div>
+                </div>
+                <input class="btn btn-success" type="submit" value="Login"/>
+            </form>
+        </div>
+        <hr>
+        <h3>New users, sign up here</h3>
+            <form method="POST" action="/users/register">
+                <div class="form-group row">
+                    <label class="col-sm-2 col-form-label" for="first_name">First Name: </label>
+                    <div class="col-sm-10">
+                        <input id="first_name" type="text" name="first_name"/>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-sm-2 col-form-label" for="last_name">Last Name: </label>
+                    <div class="col-sm-10">
+                        <input id="last_name" type="text" name="last_name"/>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-sm-2 col-form-label" for="email">Email: </label>
+                    <div class="col-sm-10">
+                        <input id="email" type="text" name="email"/>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-sm-2 col-form-label" for="password">Password: </label>
+                    <div class="col-sm-10">
+                        <input id="password" type="text" name="password"/><small id="passwordHelpInline" class="text-muted"> *Password must be min 8 characters.</small>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-sm-2 col-form-label" for="conf_pw">Confirm Password: </label>
+                    <div class="col-sm-10">
+                        <input id="conf_pw" type="text" name="conf_pw"/>
+                    </div>
+                </div>
+                <div class="col-sm-10">
+                    <input class="btn btn-primary" type="submit" value="Sign Up"/>
+                </div>
+            </form>
+        </div>
+
+        </div>
     </body>
 </html>
