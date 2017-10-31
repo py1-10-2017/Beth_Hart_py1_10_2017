@@ -46,7 +46,7 @@ def register():
     if len(request.form['password'])< 8:
         flash('Password must be at least 8 characters long.', 'danger')
         valid=False
-    if request.form['password'] != request.form['confirm_password']:
+    if request.form['password'] != request.form['conf_pw']:
         flash('Passwords do not match.', 'danger')
         valid=False
     if valid == False:
@@ -66,15 +66,14 @@ def register():
 
 @app.route('/messages')
 def home():
-    msg_query = "SELECT message, first_name, last_name, messages.created_at, messages.id as id, timestampdiff(minute, messages.created_at, now()) as timediff FROM  users JOIN messages on users.id=messages.user_id"
+    msg_query = "SELECT users.id as uid, message, first_name, last_name, messages.created_at, messages.id as id, timestampdiff(minute, messages.created_at, now()) as timediff FROM  users JOIN messages on users.id=messages.user_id"
     user_messages = mysql.query_db(msg_query)
     print user_messages
-    comment_query = "SELECT comment, message_id, first_name, last_name, comments.created_at FROM comments JOIN users on user_id=users.id order by comments.created_at desc"
+    comment_query = "SELECT users.id, comment, message_id, first_name, last_name, comments.created_at FROM comments JOIN users on user_id=users.id order by comments.created_at desc"
     comments= mysql.query_db(comment_query)
-    print comments
-    time = datetime.datetime.now()
-    print time
-    return render_template('wall.html', user_messages = user_messages, comments=comments, time=time)
+    print session['id']
+    
+    return render_template('wall.html', user_messages = user_messages, comments=comments)
     
 @app.route('/messages', methods=['POST'])
 def new_message():

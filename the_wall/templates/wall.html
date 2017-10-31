@@ -24,11 +24,11 @@
         
         {% for user_message in user_messages%}
             <h6>{{user_message['first_name']}} {{user_message['last_name']}} - {{user_message["created_at"].strftime("%m/%d/%y %I:%M")}}</h6>
-            <p class=''>{{user_message['message']}}</p>
+            <p class=''>{{user_message['message']}}
             
-            {% if user_message['timediff'] < 30 %}
+            {% if user_message['timediff'] < 30 and (user_message['uid'] == session['id']) %}
                 <a href='/messages/{{user_message['id']}}/delete' name='delete'>delete</a>
-            {% endif%}
+            {% endif%}</p>
             <div class="list-group indent">
             
                 {% for comment in comments: %}
