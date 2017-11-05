@@ -1,29 +1,29 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
-from django.shortcuts import render
-from django.http import HttpResponse
+from django.shortcuts import render, HttpResponse, redirect
+
 
 # Create your views here.
 def index(req):
-    return HttpResponse('You have reached the Index')
+    return HttpResponse('List of Blogs')
 
 
 def new(req):
-    return HttpResponse('You have reached the New route')
+    return HttpResponse('Form to create a blog')
 
 
 def create(req):
-    return HttpResponse('You have reached the create route')
+    return redirect("/")
 
 
-def show(req):
-    return HttpResponse('You have reached the show route')
+def show(req, blog_id):
+    return HttpResponse('Dispaly contents of blog ' + str(blog_id))
 
 
-def edit(req):
-    return HttpRequest('You have reached the edit route')
+def edit(req, blog_id):
+    return HttpResponse('Edit blog ' + str(blog_id))
 
 
-def delete(req):
-    return HttpRequest('You have reached the destroy route')
+def destroy(req, blog_id):
+    return redirect('/')

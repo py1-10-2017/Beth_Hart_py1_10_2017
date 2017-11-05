@@ -16,7 +16,10 @@ Including another URLconf
 from django.conf.urls import url,include
 from django.contrib import admin
 
+
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-    url(r'^blogs/', include('blogs_app.urls'), name='blogs')
+    url(r'^blogs/', include('blogs_app.urls'), name='blogs'),
+    url(r'^', include('blogs_app.urls'))
+
 ]
