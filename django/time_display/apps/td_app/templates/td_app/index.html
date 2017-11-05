@@ -1,0 +1,10 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        {% load static %}
+        <link rel="stylesheet" href="{% static 'css/style.css' %}" type="text/css" />
+    </head>
+</html>
+
+<h4>The current time and date:</h4>
+<h2>{{time |date:'M d, Y H:i'}}</hr>
