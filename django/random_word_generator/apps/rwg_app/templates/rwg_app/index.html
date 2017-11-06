@@ -1,0 +1,17 @@
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Random Word Generator</title>
+        {% load static %}
+        <link rel="stylesheet" href="{% static 'rwg_app/css/style.css'%}" type="text/css" />
+    </head>
+    <body>
+        <h3>Random Word (attempt #{{request.session.attempt}})</h3>
+        <h1>{{word}}</h1>
+        <form action='/' method='GET'>
+            {%csrf_token%}
+            <input id='submit' type="submit" value="Generate Word"/>
+        </form>
+    </body>
+</html>
