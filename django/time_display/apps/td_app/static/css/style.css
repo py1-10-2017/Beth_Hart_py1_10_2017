@@ -1,6 +1,6 @@
 h2 {
     margin: 15px auto;
-    width: 200px;
+    width: 450px;
     text-align: center;
     border: black 3px solid;
     padding: 100px;
@@ -12,4 +12,5 @@ h4 {
     width: 200px;
     border: black 3px solid;
     padding: 10px;
+    text-align:center;
 }
