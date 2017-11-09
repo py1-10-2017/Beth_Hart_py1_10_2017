@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        
+      <title>Session Words</title>
+        {%load static%}
+        <link rel="stylesheet" href="{% static 'sw_app/css/style.css' %}" type="text/css" />
+      </head>
+      <body>
+          
+        
+          <form action='/create' method='POST'>
+              {%csrf_token %}
+              <label id ='new' for="word"><h1>Add a new word: </h1></label>
+              <p><input id='word' type="text" name="word"/></p>
+              <h3>Choose color:</h3>
+              <ul>
+                  <li>
+                      <input id='red' type="radio" value="red" name="color"><label for="red"> red</label>
+                  </li>
+                  <li>
+                      <input id='blue' type="radio" value="blue" name="color"><label for="blue"> blue</label>
+                  </li>
+                  <li>
+                      <input type="radio" value="green" name="color"><label id='green' for="green"> green</label>
+                  </li>
+              </ul>
+              <p><input id='font' type='checkbox' value='font' name='font'>show BIG fonts!</p>
+              
+              <input id='add' type="submit" value="Add to session"/>
+          </form>
+          <div class="aside">
+           <form>
+             
+             <input id='red' type="submit" value="Clear Session"/>
+           </form>
+            {% for item in words %}
+              
+                 <p><span class="{{item.color}} {{item.font}}">{{item.word}}</span> -- added on {{item.time}}</p>
+             
+            {%endfor%}
+
+          </div>
+          
+        
+      </body>
+</html>

@@ -1,0 +1,44 @@
+.green {
+    color: green;
+}
+
+.blue {
+    color: blue;
+}
+
+.red {
+    color: red;
+}
+
+.font {
+    font-size: 25px;
+}
+
+form {
+    width: 30%;
+    display: inline-block;
+    padding-left: 20px;
+}
+
+.aside{
+    width: 45%;
+    display: inline-block;
+    border-left: black 3px solid;
+    padding-left: 100px;
+}
+
+ new {
+     font-size: 30px;
+ }
+ 
+li {
+    list-style-type: none;
+}
+
+#add {
+    background: green;
+}
+
+#clear {
+    background: red;
+}
