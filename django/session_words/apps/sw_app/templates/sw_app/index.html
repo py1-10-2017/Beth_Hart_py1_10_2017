@@ -9,7 +9,7 @@
       <body>
           
         
-          <form action='/create' method='POST'>
+          <form id='new_word' action='/create' method='POST'>
               {%csrf_token %}
               <label id ='new' for="word"><h1>Add a new word: </h1></label>
               <p><input id='word' type="text" name="word"/></p>
@@ -30,9 +30,9 @@
               <input id='add' type="submit" value="Add to session"/>
           </form>
           <div class="aside">
-           <form>
-             
-             <input id='red' type="submit" value="Clear Session"/>
+           <form action='/clear' method='POST'>
+               {%csrf_token %}
+                <input id='red' type="submit" value="Clear Session"/>
            </form>
             {% for item in words %}
               
