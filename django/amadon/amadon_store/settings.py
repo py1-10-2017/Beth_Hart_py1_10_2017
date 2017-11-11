@@ -25,7 +25,7 @@ SECRET_KEY = 'f6qwyo+)i07ikieq#uw)5(u5tx25+83_6w7^1b_(_3x2a^ep#^'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = [u'http://codingdojo-python1-errordrivendev.c9users.io']
+ALLOWED_HOSTS = [u'codingdojo-python1-errordrivendev.c9users.io']
 
 
 # Application definition

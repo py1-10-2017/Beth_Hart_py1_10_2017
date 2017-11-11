@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Amadon</title>
+    </head>
+    <body>
+        <table>
+            <th>Item</th>
+            <th>Price</th>            
+            <th>Buy</th>
+            <tr>
+                <td>Dojo Shirt</td>
+                <td>$19.99</td>
+                <td>
+                    <form action="/buy" method='POST'>
+                        {% csrf_token %} 
+                        <input type="hidden" name="price" value="19.99"/>
+                        <input type="hidden" name="item" value="shirt"/>
+                        <select name="qty" id="">
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                        </select>
+                        <input type="submit" value="Buy"/>
+                    </form>
+                </td>
+            </tr>
+            <tr>
+                <td>Dojo Sweater</td>
+                <td>$29.00</td>
+                <td>
+                    <form action="/buy" method='POST'>
+                        {% csrf_token %}
+                        <input type="hidden" name="price" value="29"/>
+                        <input type="hidden" name="item" value="sweater"/>
+                        <select name="qty" id="">
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                        </select>
+                        <input type="submit" value="Buy"/>
+                    </form>
+                </td>
+            </tr>
+            <tr>
+                <td>Dojo Cup</td>
+                <td>$4.99</td>
+                <td>
+                    <form action="/buy" method='POST'>
+                        {% csrf_token %}
+                        
+                        <input type="hidden" name="item" value="Cup"/>
+                        <select name="qty" id="">
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                        </select>
+                        <input type="submit" value="Buy"/>
+                    </form>
+                </td>
+            </tr>
+         </table>
+         
+        <h3>Items in cart: {{request.session.in_cart}}</h3>
+         <h3>Subtotal: {{request.session.total}}</h3>
+         
+         <form action='/clear' method='GET'>
+             {%csrf_token%}
+             <input type="submit" value="Checkout"/>
+         </form>
+
+    </body>
+</html>
