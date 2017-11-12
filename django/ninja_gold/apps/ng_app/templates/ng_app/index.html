@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title></title>
+        <style type="text/css">
+            .red {color: red;}
+            .green{color: green;}
+        </style>
+    </head>
+    <body>
+        <h2>Your Gold: {{request.session.gold}}</h2>
+        <form action='/process_money' method='POST'>
+            {%csrf_token%}
+            <p>Farm</p>
+            <input type="hidden" name='location' value="farm"/>
+            <input type="submit" value="Find Gold"/>
+        </form>        
+        <form action='/process_money' method='POST'>
+            {%csrf_token%}
+            <p>Cave</p>
+            <input type="hidden" name='location' value="cave"/>
+            <input type="submit" value="Find Gold"/>
+        </form>        
+        <form action='/process_money' method='POST'>
+            {%csrf_token%}
+            <p>House</p>
+            <input type="hidden" name='location' value="house"/>
+            <input type="submit" value="Find Gold"/>
+        </form>        
+        <form action='/process_money' method='POST'>
+            {%csrf_token%}
+            <p>Casino</p>
+            <input type="hidden" name='location' value="casino"/>
+            <input type="submit" value="Find Gold"/>
+        </form>
+        
+        {% for message in request.session.messages %}
+            {% if "lost" in message %}
+                <p class='red'>{{message}}</p>
+            {%else%}
+                <p class="green">{{message}}</p>
+            {%endif%}
+        {%endfor%}
+    </body>
+</html>
