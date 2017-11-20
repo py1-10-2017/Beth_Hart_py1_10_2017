@@ -1,0 +1,11 @@
+{%extends 'users/base.html' %}
+{%block content %}
+
+<h1>User {{user.user_id}}</h1>
+<p>Full Name: {{user}}</p>
+<p>Email: {{user.email}}</p>
+<p>Created at: {{user.created_at | date:'M d, Y H:i'}}</p>
+
+<a href='{% url "users:edit" user.id %}'>edit</a> | <a href="{% url 'users:destroy' user.id %}">delete</a>
+
+{%endblock content %}

@@ -7,3 +7,6 @@ td, th {
     width: 50px;
 }
 
+a {
+    text-decoration: underline;
+}
