@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        
+    </head>
+    <body>
+ 
+        {{books}}
+        {%for book in books%}
+            <p>{{book.name}}</p>
+            <p>    by: {% for author in book.authors.all%} {{author.first_name}} {{author.last_name}}, {%endfor%}</p>
+            <hr>
+        {% endfor%}
+        <a href="{% url 'book_authors:new'%}">add new book</a>
+    </body>
+</html>

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        
+    </head>
+    <body>
+        
+        {%if messages%}
+        {%for message in messages%}
+        {{message}}
+       
+        {%endfor%} {%endif%}
+        <form action={% url 'book_authors:new'%} method='POST'>
+            {% csrf_token%}
+            <label for="name">Title:</label>
+            <input id='name' type="text" name="name"/>            
+            <label for="desc">Description:</label>
+            <input id='desc' type="text" name="desc"/>
+            <p>Author Information:</p>
+            <label for="first_name">First Name:</label>
+            <input id='first_name' type="text" name="first_name"/>            
+            <label for="last_name">Last Name:</label>
+            <input id='last_name' type="text" name="last_name"/>            
+            <label for="email">Email:</label>
+            <input id='email' type="text" name="email"/>            
+            <label for="notes">Notes:</label>
+            <input id='notes' type="text" name="notes"/>
+            <input type="submit" value="Add Book"/>
+        </form>
+    </body>
+</html>
