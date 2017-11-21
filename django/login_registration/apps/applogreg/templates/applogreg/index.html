@@ -1,0 +1,43 @@
+{%extends 'applogreg/base.html' %}
+
+{%block title%}
+Login and Registration
+{%endblock title%}
+
+
+{%block content%}
+
+{%if messages %}
+    {% for message in messages %}
+    {{message.tags}}
+    <p class='alert alert-{{message.tags}}'>{{message}}</p>
+    {%endfor%}
+{%endif%}
+    
+<h1>Register:</h1>
+<form action='{% url "logreg:register"%}' method='POST'>
+    {% csrf_token %}
+    <label for="first_name">First Name:</label>
+    <input id="first_name"  type="text" name="first_name"/>    
+    <label for="last_name">Last Name:</label>
+    <input id="last_name"  type="text" name="last_name"/>
+    <label for="email">Email: </label>
+    <input id='email' type="textarea" name="email"/>    
+    <label for="password1">Password: </label>
+    <input id='password1' type="textarea" name="password1"/>    
+    <label for="password2">Confirm Password: </label>
+    <input id='password2' type="textarea" name="password2"/>
+    <input type="submit" value="Register"/>
+</form>
+
+<h1>Login:</h1>
+<form action='{% url "logreg:login"%}' method='POST'>
+    {% csrf_token %}
+    <label for="email">Email: </label>
+    <input id='email' type="textarea" name="email"/>    
+    <label for="password">Password: </label>
+    <input id='password' type="textarea" name="password"/>    
+    <input type="submit" value="login"/>
+</form>
+
+{%endblock content%}

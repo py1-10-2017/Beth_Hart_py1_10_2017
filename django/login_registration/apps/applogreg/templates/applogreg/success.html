@@ -1,0 +1,13 @@
+{%extends 'applogreg/base.html' %}
+
+{%block title%}Welcome!
+{%endblock title%}
+
+{%block content%}
+    <h1>Success! Welcome, {{request.session.first_name.title}}!</h1>
+    {%if messages %}
+        {% for message in messages %}
+        <p class="alert alert-{{message.tags}}">{{message}}</p>
+        {%endfor%}
+    {%endif%}
+{%endblock content%}
