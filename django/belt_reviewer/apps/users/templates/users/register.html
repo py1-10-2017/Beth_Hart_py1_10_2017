@@ -1,0 +1,84 @@
+{%extends 'books/base.html' %}
+
+{%block title%}
+Login and Registration
+{%endblock title%}
+
+
+{%block content%}
+
+{%if messages %}
+    {% for message in messages %}
+    {{message.tags}}
+    <p class='alert alert-{{message.tags}}'>{{message}}</p>
+    {%endfor%}
+{%endif%}
+    
+<div id='col'>
+<form action='3' method='POST'>
+    <fieldset>
+    <legend>Register:</legend>
+    {% csrf_token %}
+    <div class="form-group row">
+        <label class="col-sm-2 col-form-label" for="first_name">First Name:</label>
+    <div class="col-sm-4">
+        <input class="form-control" id="first_name"  type="text" name="first_name"/>    
+        </div>
+    </div>
+    <div class="form-group row">
+        <label class="col-sm-2 col-form-label" for="last_name">Last Name:</label>
+    <div class="col-sm-4">
+        <input class="form-control" id="last_name"  type="text" name="last_name"/>
+        </div>
+    </div>
+    <div class="form-group row">
+        <label class="col-sm-2 col-form-label" for="email">Email: </label>
+    <div class="col-sm-4">
+        <input class="form-control" id='email' type="textarea" name="email"/>    
+        </div>
+    </div>
+    <div class="form-group row">
+        <label class="col-sm-2 col-form-label" for="password1">Password: </label>
+    <div class="col-sm-4">
+        <input class="form-control" id='password1' type="password" name="password1"/>    
+        </div>
+    </div>
+    <div class="form-group row">
+        <label class="col-sm-2 col-form-label" for="password2">Confirm Password: </label>
+    <div class="col-sm-4">
+        <input class="form-control" id='password2' type="password" name="password2"/>
+        </div>
+    </div>
+    <div class="form-group row">
+        <p class='form control col-sm-10' </p>
+        <input class="float-right col-sm-2" type="submit" value="Register"/>
+    </div>
+</fieldset>
+</form>
+</div>
+<div id='col'>
+<form action="#" method='POST'>
+  <fieldset> 
+  <legend>Log In:</legend>
+        {% csrf_token %}
+        <div class="form-group row">
+            <label class="col-sm-2 col-form-label" for="email">Email: </label>
+            <div class="col-sm-4">
+                <input class="form-control" id='email' type="textarea" name="email"/>    
+            </div>
+        </div>
+        <div class="form-group row">
+            <label class="col-sm-2 col-form-label" for="password">Password: </label>
+            <div class="col-sm-4">
+                <input class="form-control" id='password' type="textarea" name="password"/>    
+            </div>
+        </div>
+        <div class="form-group row">
+            <pc class='col-sm-8'></p>
+        <input class='float-right col-sm-2' type="submit" value="Log In"/>
+        </div>
+</fieldset>
+</form>
+ </div>
+
+{%endblock content%}

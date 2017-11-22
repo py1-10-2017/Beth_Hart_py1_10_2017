@@ -1,0 +1,38 @@
+#yellow{
+    color: yellow;
+	text-shadow:
+		-1px -1px 0 #000,
+		1px -1px 0 #000,
+		-1px 1px 0 #000,
+		1px 1px 0 #000;
+}
+
+ #stars{
+    font-size:20px;
+}
+.review{
+    font-style: italic;
+}
+
+.booklist {
+    overflow: scroll;
+    height: 200px;
+    width: 200px;
+    border: 2px solid black;
+
+}
+
+a{
+    text-decoration: underline;
+}
+#add{
+    text-align: right;
+}
+
+
+
+ .listing, .addrev{
+    display:inline-block;
+    vertical-align: top;
+    width:500px;
+}

@@ -1,0 +1,43 @@
+{%extends 'books/base.html' %}
+
+{%block title%}Add Book and Review{%endblock title%}
+
+{%block content%}
+<h1>Add New Book Title and a Review:</h1>
+<form action='{% url "books:create"%}' method='POST'>
+    {% csrf_token %}
+    <div class="form-group row">
+        <label class="col-sm-2 col-form-label" for="title">Book Title:</label>
+    <div class="col-sm-6">
+        <input class="form-control" id="title"  type="text" name="title" required/>    
+        </div>
+    </div>
+    <div class="form-group row">
+        <label class="col-sm-2 col-form-label" for="new_author">Author:</label>
+    <div class="col-sm-6">
+        <input class="form-control" id="new_author"  type="text" name="new_author" required/>
+        </div>
+    </div>
+    <div class="form-group row">
+        <label class="col-sm-2 col-form-label" for="content">Review: </label>
+    <div class="col-sm-10">
+        <input class="form-control" id='content' type="textarea" name="content" required/>    
+        </div>
+    </div>
+    <div class="form-group row">
+    <textarea name='review' cols="50" rows='5'></textarea>
+    <p>Rating: <select  id='rating' name="rating"/>  
+            <option name='rating' value='1'>1</option>
+            <option name='rating' value='2'>2</option>
+            <option name='rating' value='3'>3</option>
+            <option name='rating' value='4'>4</option>
+            <option name='rating' value='5'>5</option>
+        </select>
+        </div>
+    </div>
+    <div class="form-group row">
+        <p class='form control col-sm-10' </p>
+        <input class="float-right col-sm-2" type="submit" value="Add Book and Review"/>
+</form>
+
+{%endblock content%}
