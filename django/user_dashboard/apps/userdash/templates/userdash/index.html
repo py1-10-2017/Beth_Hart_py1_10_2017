@@ -1,0 +1,16 @@
+{% extends 'userdash/base.html' %}
+
+{%block title%}Home Page
+{%endblock title%}
+
+
+{%block content%}
+<div class="jumbotron">
+  <h1 class="display-3">Welcome to the Test!</h1>
+  <p class="lead">This is an application utalizing a MVC framework -- allowing users to leave messages and add comments to other users.</p>
+  <hr class="my-4">
+  <p class="lead">
+    <a class="btn btn-primary btn-lg" href="{% url 'userdash:login' %}" role="button">Start</a>
+  </p>
+</div>
+{%endblock content%}
