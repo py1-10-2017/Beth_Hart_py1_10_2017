@@ -1,48 +1,42 @@
-{%extends 'books/base.html' %}
+{%extends 'books/base.html' %} {%block title%}Books Home{%endblock title%} {%block content%}
 
-{%block title%}Books Home{%endblock title%}
+{%if messages %} {% for message in messages %}
+    <p class='alert alert-{{message.tags}}'>{{message}}</p>
+    {%endfor%} {%endif%}
 
-{%block content%}
-
-    <div class='listing'>
-        <h4>Recent Book Reviews:</h4>
-        {% for review in reviews %}
-            <h5><a href='#'>{{review.book.title.title}}</a></h5>
-            <div id='stars'>
-                {% if review.rating == 5%}
-                <span id='yellow'>&#9733;</span>
-                <span id='yellow'>&#9733;</span>
-                <span id='yellow'>&#9733;</span>
-                <span id='yellow'>&#9733;</span>
-                <span id='yellow'>&#9733;</span>
-                {%elif review.rating == 4%}
-                <span id='yellow'>&#9733;</span>
-                <span id='yellow'>&#9733;</span>
-                <span id='yellow'>&#9733;</span>
-                <span id='yellow'>&#9733;</span>&#9734;
-                {%elif review.rating == 3%}
-                <span id='yellow'>&#9733;</span>
-                <span id='yellow'>&#9733;</span>
-                <span id='yellow'>&#9733;</span>&#9734;&#9734;
-                {%elif review.rating == 2%}
-                <span id='yellow'>&#9733;</span>
-                <span id='yellow'>&#9733;</span>&#9734;&#9734;&#9734;
-                {%elif review.rating == 1%}
-                <span id='yellow'>&#9733;</span>&#9734;&#9734;&#9734;&#9734;
-                {%endif%}
-                </div>
-            <p class="review">{{review.content}}</p>
-               <p class="review">Posted on: {{review.created_at|date:'M d, Y H:i'}}</p>
-                <hr>
-            {%endfor%}
-            </div>
-    <div class='listing'>
-        <p><a id="add" href="{% url 'books:new' %}">Add a new book</a></p>
-        <h4>Other Books with Reviews:</h4>
-         <div class='booklist'>
-         {%for book in books%}
-         <p><a href='#'>{{book.title}}</a></p>
-         {%endfor%}
+<div class='listing'>
+    <h4>Recent Book Reviews:</h4>
+    {% for review in reviews %}
+    <h5><a href='show/{{review.book_id}}'>{{review.book.title.title}}</a></h5>
+    <div id='stars'>
+        {% if review.rating == 5%}
+        <span id='yellow'>&#9733;</span>
+        <span id='yellow'>&#9733;</span>
+        <span id='yellow'>&#9733;</span>
+        <span id='yellow'>&#9733;</span>
+        <span id='yellow'>&#9733;</span> {%elif review.rating == 4%}
+        <span id='yellow'>&#9733;</span>
+        <span id='yellow'>&#9733;</span>
+        <span id='yellow'>&#9733;</span>
+        <span id='yellow'>&#9733;</span>&#9734; {%elif review.rating == 3%}
+        <span id='yellow'>&#9733;</span>
+        <span id='yellow'>&#9733;</span>
+        <span id='yellow'>&#9733;</span>&#9734;&#9734; {%elif review.rating == 2%}
+        <span id='yellow'>&#9733;</span>
+        <span id='yellow'>&#9733;</span>&#9734;&#9734;&#9734; {%elif review.rating == 1%}
+        <span id='yellow'>&#9733;</span>&#9734;&#9734;&#9734;&#9734; {%endif%}
+    </div>
+    <p class="review"><a href="{% url 'users:show' review.user_id%}">{{review.user.first_name}}</a>: {{review.content}}</p>
+    <p class="review">Posted on: {{review.created_at|date:'M d, Y H:i'}}</p>
+    <hr> {%endfor%}
+</div>
+<div class='listing'>
+    <p><a id="add" href="{% url 'books:new' %}">Add a new book</a></p>
+    <h4>Other Books with Reviews:</h4>
+    <div class='booklist'>
+        {%for book in books%}
+        <p><a href='show/{{book.id}}'>{{book.title}}</a></p>
+        {%endfor%}
     </div>
 </div>
 

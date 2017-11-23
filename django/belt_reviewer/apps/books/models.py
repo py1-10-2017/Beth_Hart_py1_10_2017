@@ -2,6 +2,7 @@
 from __future__ import unicode_literals
 
 from django.db import models
+from ..users.models import User
 
 class Author(models.Model):
     name= models.CharField(max_length=255)
@@ -19,6 +20,7 @@ class Review(models.Model):
     content= models.TextField()
     rating=models.IntegerField()
     book=models.ForeignKey(Book, related_name='reviews')
+    user=models.ForeignKey(User, related_name='reviews')
     created_at=models.DateTimeField(auto_now_add=True)
     updated_at=models.DateTimeField(auto_now=True)
     

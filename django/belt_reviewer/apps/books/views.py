@@ -6,7 +6,7 @@ from .models import *
 
 def index(request):
     reviews = Review.objects.all()
-    books = Book.objects.values('title')
+    books = Book.objects.values('title', 'id')
     return render(request, 'books/index.html', {'reviews':reviews[:5], 'books':books})
 
 def new(request):
@@ -20,6 +20,12 @@ def create(request):
     r = Review(content=request.POST['content'], rating=request.POST['rating'], book=b)
     r.save()
     return redirect('show/' + str(b.id))
+    
+def update(request, book_id):
+    book =Book.objects.get(id=book_id)
+    new_review = Review(content=request.POST['review'], rating=request.POST['rating'], book=book)
+    new_review.save()
+    return redirect('/books/show/' + book_id)
     
 def show(request, book_id):
     book = Book.objects.get(id=book_id)

@@ -1,0 +1,17 @@
+{%extends 'books/base.html' %} {%block title%}User Profile{%endblock title%} {%block content%}
+
+<div class="listing">
+    <h2>{{user.first_name.title}} {{user.last_name.title}}</h2>
+    <h4>Email: {{user.email}}</h4>
+    <p>Total Review:</p>
+</div>
+<div class=''>
+    <p>Posted Reviews on the following books:</p>
+    {% for review in reviews%}
+            <p><a href={%url 'books:show' review.book.id %}>{{review.book.title}}</a></p>
+    {%endfor%}
+
+</div>
+
+
+{%endblock content%}

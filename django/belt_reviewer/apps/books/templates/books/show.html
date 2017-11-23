@@ -1,53 +1,47 @@
-{%extends 'books/base.html' %}
-
-{%block title%}   {%endblock title%}
-
-{%block content%}
+{%extends 'books/base.html' %} {%block title%} {%endblock title%} {%block content%}
 
 <div class="listing">
-<h2>{{book.title.title}}</h2>
-<h4>Author: {{book.author}}</h4>
-{%for review in book.reviews.all%}
+    <h2>{{book.title.title}}</h2>
+    <h4>Author: {{book.author}}</h4>
+    {%for review in book.reviews.all%}
 
-<div id='stars'>
-{% if review.rating == 5%}
-<span id='yellow'>&#9733;</span>
-<span id='yellow'>&#9733;</span>
-<span id='yellow'>&#9733;</span>
-<span id='yellow'>&#9733;</span>
-<span id='yellow'>&#9733;</span>
-{%elif review.rating == 4%}
-<span id='yellow'>&#9733;</span>
-<span id='yellow'>&#9733;</span>
-<span id='yellow'>&#9733;</span>
-<span id='yellow'>&#9733;</span>&#9734;
-{%elif review.rating == 3%}
-<span id='yellow'>&#9733;</span>
-<span id='yellow'>&#9733;</span>
-<span id='yellow'>&#9733;</span>&#9734;&#9734;
-{%elif review.rating == 2%}
-<span id='yellow'>&#9733;</span>
-<span id='yellow'>&#9733;</span>&#9734;&#9734;&#9734;
-{%elif review.rating == 1%}
-<span id='yellow'>&#9733;</span>&#9734;&#9734;&#9734;&#9734;
-{%endif%}
-</div>
-<p id='review'>-{{review.content}}</p>
-{%endfor%}
+    <div id='stars'>
+        {% if review.rating == 5%}
+        <span id='yellow'>&#9733;</span>
+        <span id='yellow'>&#9733;</span>
+        <span id='yellow'>&#9733;</span>
+        <span id='yellow'>&#9733;</span>
+        <span id='yellow'>&#9733;</span> {%elif review.rating == 4%}
+        <span id='yellow'>&#9733;</span>
+        <span id='yellow'>&#9733;</span>
+        <span id='yellow'>&#9733;</span>
+        <span id='yellow'>&#9733;</span>&#9734; {%elif review.rating == 3%}
+        <span id='yellow'>&#9733;</span>
+        <span id='yellow'>&#9733;</span>
+        <span id='yellow'>&#9733;</span>&#9734;&#9734; {%elif review.rating == 2%}
+        <span id='yellow'>&#9733;</span>
+        <span id='yellow'>&#9733;</span>&#9734;&#9734;&#9734; {%elif review.rating == 1%}
+        <span id='yellow'>&#9733;</span>&#9734;&#9734;&#9734;&#9734; {%endif%}
+    </div>
+    <p id='review'>-{{review.content}}</p>
+    {%endfor%}
 </div>
 
 <div class='addrev'>
     <h3>Add a Review:</h3>
-    <form></form>
-    <textarea name='review' cols="50" rows='5'></textarea>
-    <p>Rating: <select  id='rating' name="rating"/> 
-        <option name='rating' value='1'>1</option>
-        <option name='rating' value='2'>2</option>
-        <option name='rating' value='3'>3</option>
-        <option name='rating' value='4'>4</option>
-        <option name='rating' value='5'>5</option>
-    </select></p>
-    <input type='submit' value='Submit Review'>
+    <form action="{%url 'books:update' book.id %}" method='POST'>
+        {%csrf_token%}
+        <p>Star Rating:
+            <select id='rating' name="rating" />
+            <option name='rating' value='1'>1</option>
+            <option name='rating' value='2'>2</option>
+            <option name='rating' value='3'>3</option>
+            <option name='rating' value='4'>4</option>
+            <option name='rating' value='5'>5</option>
+            </select>
+        </p>
+        <textarea name='review' cols="50" rows='5'></textarea>
+        <input type='submit' value='Submit Review'>
     </form>
 </div>
 
